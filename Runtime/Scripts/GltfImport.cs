@@ -36,6 +36,7 @@ using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using GLTFast.Jobs;
 using Unity.Collections.LowLevel.Unsafe;
+using Unity.Mathematics;
 using Debug = UnityEngine.Debug;
 #if MEASURE_TIMINGS
 using GLTFast.Tests;
@@ -2313,7 +2314,7 @@ namespace GLTFast {
                     var job8 = new Jobs.GetIndicesUInt8FlippedJob();
                     fixed( void* src = &(buffer[start]), dst = &(indices[0]) ) {
                         job8.input = (byte*)src;
-                        job8.result = (int*)dst;
+                        job8.result = (int3*)dst;
                     }
                     jobHandle = job8.Schedule(accessor.count/3,DefaultBatchCount);
                 } else {
@@ -2428,9 +2429,9 @@ namespace GLTFast {
             Profiler.BeginSample("CreateJob");
             switch( accessor.componentType ) {
             case GLTFComponentType.Float when flip: {
-                var job = new GetVector3sJob { result = (float*)vectors.GetUnsafePtr() };
+                var job = new GetVector3sJob { result = (float3*)vectors.GetUnsafePtr() };
                 fixed( void* src = &(buffer[start]) ) {
-                    job.input = (float*) src;
+                    job.input = (float3*) src;
                 }
                 jobHandle = job.Schedule(accessor.count,DefaultBatchCount);
                 break;

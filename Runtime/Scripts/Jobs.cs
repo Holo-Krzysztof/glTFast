@@ -319,13 +319,12 @@ namespace GLTFast.Jobs {
 
         [ReadOnly]
         [NativeDisableUnsafePtrRestriction]
-        public int* result;
+        public int3* result;
 
-        public void Execute(int i)
-        {
-            result[i*3] = input[i*3];
-            result[i*3+2] = input[i*3+1];
-            result[i*3+1] = input[i*3+2];
+        public void Execute(int i) {
+            result[i].x = input[i*3];
+            result[i].y = input[i*3+2];
+            result[i].z = input[i*3+1];
         }
     }
 
@@ -884,17 +883,16 @@ namespace GLTFast.Jobs {
     public unsafe struct GetVector3sJob : IJobParallelFor {
         [ReadOnly]
         [NativeDisableUnsafePtrRestriction]
-        public float* input;
+        public float3* input;
 
         [ReadOnly]
         [NativeDisableUnsafePtrRestriction]
-        public float* result;
+        public float3* result;
 
         public void Execute(int i) {
-            int ti = i*3;
-            result[ti] = -input[ti];
-            result[ti+1] = input[ti+1];
-            result[ti+2] = input[ti+2];
+            var tmp = input[i];
+            tmp.x = -tmp.x;
+            result[i] = tmp;
         }
     }
 
@@ -1003,10 +1001,11 @@ namespace GLTFast.Jobs {
         public float3* result;
 
         public void Execute(int i) {
-            var resultV = (float*) (((byte*)result) + (i*outputByteStride));
-            var off = (float*) (input + i*inputByteStride);
-            *(resultV) = -*((float*)off);
-            *((float2*)(resultV+1)) = *((float2*)(off+1));
+            var resultV = (float3*) (((byte*)result) + (i*outputByteStride));
+            var off = (float3*) (input + i*inputByteStride);
+            var tmp = *off;
+            tmp.x = -tmp.x;
+            *resultV = tmp;
         }
     }
 
