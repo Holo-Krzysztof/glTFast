@@ -404,93 +404,118 @@ namespace GLTFast.Jobs {
         }
     }
 
-    [BurstCompile]
-    public unsafe struct GetUVsUInt8Job : IJobParallelFor  {
+    /// <summary>
+    /// Unused at the moment in favor of interleaved variant
+    /// TODO: Investigate if this would be faster
+    /// when input is not interleaved 
+    /// </summary>
+    // [BurstCompile]
+    // public unsafe struct GetUVsUInt8Job : IJobParallelFor  {
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public byte* input;
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float2* result;
+    //
+    //     public void Execute(int i)
+    //     {
+    //         result[i].x = input[i*2];
+    //         result[i].y = 1 - input[i*2+1];
+    //     }
+    // }
 
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public byte* input;
+    /// <summary>
+    /// Unused at the moment in favor of interleaved variant
+    /// TODO: Investigate if this would be faster
+    /// when input is not interleaved 
+    /// </summary>
+    // [BurstCompile]
+    // public unsafe struct GetUVsUInt8NormalizedJob : IJobParallelFor  {
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public byte* input;
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float2* result;
+    //
+    //     public void Execute(int i)
+    //     {
+    //         result[i].x = input[i*2] / 255f;
+    //         result[i].y = 1 - input[i*2+1] / 255f;
+    //     }
+    // }
 
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float2* result;
+    /// <summary>
+    /// Unused at the moment in favor of interleaved variant
+    /// TODO: Investigate if this would be faster
+    /// when input is not interleaved 
+    /// </summary>
+    // [BurstCompile]
+    // public unsafe struct GetUVsUInt16NormalizedJob : IJobParallelFor  {
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public ushort* input;
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float2* result;
+    //
+    //     public void Execute(int i)
+    //     {
+    //         result[i].x = input[i*2] / (float) ushort.MaxValue;
+    //         result[i].y = 1 - input[i*2+1] / (float) ushort.MaxValue;
+    //     }
+    // }
 
-        public void Execute(int i)
-        {
-            result[i].x = input[i*2];
-            result[i].y = 1 - input[i*2+1];
-        }
-    }
+    /// <summary>
+    /// Unused at the moment in favor of interleaved variant
+    /// TODO: Investigate if this would be faster
+    /// when input is not interleaved 
+    /// </summary>
+    // [BurstCompile]
+    // public unsafe struct GetUVsUInt16Job : IJobParallelFor  {
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public ushort* input;
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float2* result;
+    //
+    //     public void Execute(int i)
+    //     {
+    //         result[i].x = input[i*2];
+    //         result[i].y = 1 - input[i*2+1];
+    //     }
+    // }
 
-    [BurstCompile]
-    public unsafe struct GetUVsUInt8NormalizedJob : IJobParallelFor  {
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public byte* input;
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float2* result;
-
-        public void Execute(int i)
-        {
-            result[i].x = input[i*2] / 255f;
-            result[i].y = 1 - input[i*2+1] / 255f;
-        }
-    }
-
-    [BurstCompile]
-    public unsafe struct GetUVsUInt16NormalizedJob : IJobParallelFor  {
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public ushort* input;
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float2* result;
-
-        public void Execute(int i)
-        {
-            result[i].x = input[i*2] / (float) ushort.MaxValue;
-            result[i].y = 1 - input[i*2+1] / (float) ushort.MaxValue;
-        }
-    }
-
-    [BurstCompile]
-    public unsafe struct GetUVsUInt16Job : IJobParallelFor  {
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public ushort* input;
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float2* result;
-
-        public void Execute(int i)
-        {
-            result[i].x = input[i*2];
-            result[i].y = 1 - input[i*2+1];
-        }
-    }
-
-    [BurstCompile]
-    public unsafe struct GetUVsFloatJob : IJobParallelFor {
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float* input;
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float2* result;
-
-        public void Execute(int i) {
-            result[i].x = ((float*)input)[i*2];
-            result[i].y = 1-((float*)input)[i*2+1];
-        }
-    }
+    /// <summary>
+    /// Unused at the moment in favor of interleaved variant
+    /// TODO: Investigate if this would be faster
+    /// when input is not interleaved 
+    /// </summary>
+    // [BurstCompile]
+    // public unsafe struct GetUVsFloatJob : IJobParallelFor {
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float* input;
+    //
+    //     [ReadOnly]
+    //     [NativeDisableUnsafePtrRestriction]
+    //     public float2* result;
+    //
+    //     public void Execute(int i) {
+    //         result[i].x = ((float*)input)[i*2];
+    //         result[i].y = 1-((float*)input)[i*2+1];
+    //     }
+    // }
 
     /// Untested!
     [BurstCompile]
@@ -779,30 +804,6 @@ namespace GLTFast.Jobs {
                 b = src[2] / (float)ushort.MaxValue,
                 a = 1f
             };
-        }
-    }
-
-    [BurstCompile]
-    public unsafe struct GetColorsVec4FloatJob : IJobParallelFor {
-
-        [ReadOnly]
-        public int inputByteStride;
-
-        [ReadOnly]
-        [NativeDisableUnsafePtrRestriction]
-        public float* input;
-
-        [WriteOnly]
-        public NativeArray<Color> result;
-
-        public void Execute(int i) {
-            float* src = (float*) (((byte*) input) + (i * inputByteStride));
-            result[i] = new Color(
-                src[0],
-                src[1],
-                src[2],
-                src[3]
-            );
         }
     }
 
